@@ -86,6 +86,7 @@ If symbol is "IBM" then message goes to the BE, else message dropped
 If stock name of the id '3' is "WSO2" then message goes to the BE, else message dropped
 
 > _Request_ - http://localhost:9090/xpathwithattributesfilter 
+
 > _Payload_ - 
 ```<getQuote>
 <stock id="1">foo</stock>
@@ -93,6 +94,7 @@ If stock name of the id '3' is "WSO2" then message goes to the BE, else message 
 <stock id="3">IBM</stock>
 <stock id="4">WSO2</stock>
 </getQuote>```
+
 
 ##### **Service 06** - AnyMatchingXPathFilter.bal
 If 'ID' of the given xml equals to '990' then message processed, else message dropped
