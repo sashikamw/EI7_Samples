@@ -59,6 +59,7 @@ If symbol of the second element in stock array is "WSO2" then message goes to th
 If symbol is "foo" then message goes to the BE, else message dropped
 
 > _Request_ - http://localhost:9090/xpathwithoutNameSpacefilter 
+
 > _Payload_ - ```<getQuote><symbol>foo</symbol></getQuote>```
 
 ##### **Service 04** - XPathNameSpaceFilter.bal
@@ -86,12 +87,12 @@ If stock name of the id '3' is "WSO2" then message goes to the BE, else message 
 
 > _Request_ - http://localhost:9090/xpathwithattributesfilter 
 > _Payload_ - 
-<getQuote>
+```<getQuote>
 <stock id="1">foo</stock>
 <stock id="2">bar</stock>
 <stock id="3">IBM</stock>
 <stock id="4">WSO2</stock>
-</getQuote>
+</getQuote>```
 
 ##### **Service 06** - AnyMatchingXPathFilter.bal
 If 'ID' of the given xml equals to '990' then message processed, else message dropped
@@ -118,6 +119,7 @@ If 'ID' of the given xml equals to '990' then message processed, else message dr
 ##### **Service 07** - XPathwithspecialcharachters.bal
 Select the message where the stock 'ID' less than 3 and more than 1, then process the message, else dropped the message
 > _Request_ - http://localhost:9090/xpathspecialcharachterfilter 
+
 > _Payload_ - 
 ```<getQuote>
 <stock id="1">foo</stock>
@@ -129,31 +131,40 @@ Select the message where the stock 'ID' less than 3 and more than 1, then proces
 ##### **Service 08** - HeaderBasedFilter.bal
 If the 'name' header is 'IBM' then process the message, else message dropped
 > _Request_ - http://localhost:9090/headerfilter
+
 > _HTTP_Method_ - GET
+
 > _Header_ - name : IBM
 
 ##### **Service 09** - QueryparamBasedFilter.bal
 If the query parameter value is 'IBM' the process the message, else message dropped
 > _Request_ - http://localhost:9090/queryparamfilter?stockname=IBM
+
 > _HTTP_Method_ - GET
 
 
 ##### **Service 10** - RouteUsingAnd.bal
 If the both ariterias met then process the message, else message dropped
 > _Request_ - http://localhost:9090/routeusingand
+
 > _Header_ - exchange : nasdaq
+
 > _Payload_ - {"name" : "IBM"}
 
 ##### **Service 11** - RouteUsingOR.bal
 If the request fulfils any of the given criteria then process the message, else message dropped
 > _Request_ - http://localhost:9090/routeusingor
+
 > _Header_ - exchange : nasdaq
+
 > _Payload_ - {"name" : "IBM"}
 
 ##### **Service 12** - RouteUsingAndOr.bal
 If stock url contains "routeusingandor" AND stockvalue = "IBM"  Then verify whether price >= 180 OR exchange = "nasdaq". if criteria met message processed, else message dropped
 > _Request_ - http://localhost:9090/routeusingor
+
 > _Header_ - exchange : nasdaq
+
 > _Payload_ - {   "StockExchange": "NASDAQ",
   "Country" : "London",
   "address"  : {
@@ -174,7 +185,9 @@ If stock url contains "routeusingandor" AND stockvalue = "IBM"  Then verify whet
 ##### **Service 13** - RouteUsingAndOrNot.bal
 If the 'requestor' is not "Peter" then verify If stock url contains "routeusingandor" AND stockvalue = "IBM", Then verify whether price >= 180 OR exchange = "nasdaq". if criteria met message processed, else message dropped
 > _Request_ - http://localhost:9090/routeusingandornot
+
 > _Header_ - exchange : nasdaq , requestor : EITeam
+
 > _Payload_ - {
   "StockExchange": "NASDAQ",
   "Country" : "London",
@@ -198,14 +211,16 @@ If the 'requestor' is not "Peter" then verify If stock url contains "routeusinga
 ##### **Service 14** - XPathMultipleCaseWithDefaultCase.bal
 If multiple cases exists for a given xpath, direct to the correct case based on the value and process the message, else send the message to the default case.
 > _Request_ - http://localhost:9090/xpathmultiplecasewithdefault
+
 > _Payload_ - 
-<getQuote>
+```<getQuote>
     <symbol>IBM</symbol>
-</getQuote>
+</getQuote>```
 
 
 ##### **Service 15** - JSONPathMultipleCaseWithDefaultCase.bal
 If multiple cases exists for a given xpath, direct to the correct case based on the value and process the message, else send the message to the default case.
 > _Request_ - http://localhost:9090/jsonpathmultiplecasewithdefault
+
 > _Payload_ -  {"name" : "WSO2"} 
 
