@@ -88,12 +88,14 @@ If stock name of the id '3' is "WSO2" then message goes to the BE, else message 
 > _Request_ - http://localhost:9090/xpathwithattributesfilter 
 
 > _Payload_ - 
-```<getQuote>
+```
+<getQuote>
 <stock id="1">foo</stock>
 <stock id="2">bar</stock>
 <stock id="3">IBM</stock>
 <stock id="4">WSO2</stock>
-</getQuote>```
+</getQuote>
+```
 
 
 ##### **Service 06** - AnyMatchingXPathFilter.bal
