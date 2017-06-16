@@ -6,20 +6,20 @@ import ballerina.lang.xmls;
 import Endpoints as endpoints;
 
 
-@http:BasePath{value: "/xpathwithattributesfilter"}
-service xpathWithAttributesService {
+@http:BasePath{value: "/xpathspecialcharachterfilter"}
+service xpathwithoSpeacialCharachterFilter {
 
     @http:POST{}
-    resource xpathWithAttributesResource(message m) {
+    resource xpathwithoutNameSpaceResource(message m) {
         xml incomingPayload = messages:getXmlPayload(m);
 	http:ClientConnector stockEP = create http:ClientConnector(endpoints:stockEPurl);
 	
-        // If the stock symbol is 'IBM' then route to the backend, if not discard.
-        string stockValue = xmls:getString(incomingPayload, "//stock[@id='3']/text()");
+        // If the stock symbol is 'bar' then route to the backend, if not discard.
+        string stockValue = xmls:getString(incomingPayload, "//stock[@id<3 and @id>1]/text()");
         messages:setStringPayload( m, stockValue);
         message response = {};
 
-        if (stockValue == "IBM") {
+        if (stockValue == "bar") {
              response = http:ClientConnector.post(stockEP, "/", m);
             
         }  

@@ -6,11 +6,20 @@ Sample scenarios related to message filtering based on following criteria;
 4. based on the XPath with namespace - XPathNameSpaceFilter.bal
 5. based on the Xpath when request contains attributes - XPathwithAttributes.bal
 6. based on any of the maching xpath criteria - AnyMatchingXPathFilter.bal
+7. based on the XPath when xpath contains '<' and '>' charachters - XPathwithspecialcharachters.bal
+8. based on the header value - HeaderBasedFilter.bal
+9. based on query paramter - QueryparamBasedFilter.bal
+10. based on maching conditions with AND opertaion - RouteUsingAnd.bal
+11. based on maching conditions with OR opertaion - RouteUsingOR.bal
+12. based on maching conditions with AND & OR opertaions - RouteUsingAndOr.bal
+13. based on maching conditions with AND, OR & NOT opertaions - RouteUsingAndOrNot.bal
+14. when multiple cases exists for a matching Xpath - XPathMultipleCaseWithDefaultCase.bal
+15. when multiple cases exists for a matching JOSNpath - JSONPathMultipleCaseWithDefaultCase.bal
 
 
 #### **How to run this sample**
 
-Go to "Ballerina0.87" directory. Then execute "<Ballerina_HOME>/bin/ballerina run service MessageRouting/MessageFiltering/"
+Download the ballerina0.87 samples and go to "Ballerina0.87" directory. Then execute "<Ballerina_HOME>/bin/ballerina run service Filtering/"
 
 
 #### **Invoking the services**
@@ -87,6 +96,7 @@ If 'ID' of the given xml equals to '990' then message processed, else message dr
 
 
 > _Payload_ - 
+```
 (1) 
 <EmployeePersonalDetails>
 <ID>990</ID>
@@ -99,6 +109,100 @@ If 'ID' of the given xml equals to '990' then message processed, else message dr
 <ID>990</ID>
 <Team>EI</Team>
 <SubTeam>EE</SubTeam>
-</EmployeeDepartmentInfo>
+</EmployeeDepartmentInfo> 
+```
 
-----------------------------------------------------------------------------------------------------------
+##### **Service 07** - XPathwithspecialcharachters.bal
+Select the message where the stock 'ID' less than 3 and more than 1, then process the message, else dropped the message
+> _Request_ - http://localhost:9090/xpathspecialcharachterfilter 
+_Payload_ - 
+<getQuote>
+<stock id="1">foo</stock>
+<stock id="2">bar</stock>
+<stock id="3">IBM</stock>
+<stock id="4">WSO2</stock>
+</getQuote>
+
+##### **Service 08** - HeaderBasedFilter.bal
+If the 'name' header is 'IBM' then process the message, else message dropped
+> _Request_ - http://localhost:9090/headerfilter
+_HTTP_Method_ - GET
+_Header_ - name : IBM
+
+##### **Service 09** - QueryparamBasedFilter.bal
+If the query parameter value is 'IBM' the process the message, else message dropped
+> _Request_ - http://localhost:9090/queryparamfilter?stockname=IBM
+_HTTP_Method_ - GET
+
+
+##### **Service 10** - RouteUsingAnd.bal
+If the both ariterias met then process the message, else message dropped
+> _Request_ - http://localhost:9090/routeusingand
+_Header_ - exchange : nasdaq
+_Payload_ - {"name" : "IBM"}
+
+##### **Service 11** - RouteUsingOR.bal
+If the request fulfils any of the given criteria then process the message, else message dropped
+> _Request_ - http://localhost:9090/routeusingor
+_Header_ - exchange : nasdaq
+_Payload_ - {"name" : "IBM"}
+
+##### **Service 12** - RouteUsingAndOr.bal
+If stock url contains "routeusingandor" AND stockvalue = "IBM"  Then verify whether price >= 180 OR exchange = "nasdaq". if criteria met message processed, else message dropped
+> _Request_ - http://localhost:9090/routeusingor
+_Header_ - exchange : nasdaq
+_Payload_ - {   "StockExchange": "NASDAQ",
+  "Country" : "London",
+  "address"  : {
+    "streetAddress": "naist street",
+    "city"         : "Nara",
+    "postalCode"   : "630-0192"
+  },
+  "Stocks": [     {
+      "symbol"  : "IBM",
+      "price": "189.00"
+    },
+    {
+      "symbol"  : "WSO2",
+      "price": "230.18"
+    }   ]
+}
+
+##### **Service 13** - RouteUsingAndOrNot.bal
+If the 'requestor' is not "Peter" then verify If stock url contains "routeusingandor" AND stockvalue = "IBM", Then verify whether price >= 180 OR exchange = "nasdaq". if criteria met message processed, else message dropped
+> _Request_ - http://localhost:9090/routeusingandornot
+_Header_ - exchange : nasdaq , requestor : EITeam
+_Payload_ - {
+  "StockExchange": "NASDAQ",
+  "Country" : "London",
+  "address"  : {
+    "streetAddress": "naist street",
+    "city"         : "Nara",
+    "postalCode"   : "630-0192"
+  },
+  "Stocks": [
+    {
+      "symbol"  : "IBM",
+      "price": "189.00"
+    },
+    {
+      "symbol"  : "WSO2",
+      "price": "230.18"
+    }
+  ]
+}
+
+##### **Service 14** - XPathMultipleCaseWithDefaultCase.bal
+If multiple cases exists for a given xpath, direct to the correct case based on the value and process the message, else send the message to the default case.
+> _Request_ - http://localhost:9090/xpathmultiplecasewithdefault
+_Payload_ - 
+<getQuote>
+    <symbol>IBM</symbol>
+</getQuote>
+
+
+##### **Service 15** - JSONPathMultipleCaseWithDefaultCase.bal
+If multiple cases exists for a given xpath, direct to the correct case based on the value and process the message, else send the message to the default case.
+> _Request_ - http://localhost:9090/jsonpathmultiplecasewithdefault
+_Payload_ -  {"name" : "WSO2"} 
+
