@@ -27,11 +27,13 @@ Download the ballerina0.87 samples and go to "Ballerina0.87" directory. Then exe
 ##### **Service 01** - JSONPathFilter.bal
 If name is "nyse" then message goes to the BE, else message dropped
 > _Request_ - http://localhost:9090/jsonpathfilter 
+
 > _Payload_ - {"name" : "nyse"}
 
 ##### **Service 02** - JSONArrayFilter.bal
 If symbol of the second element in stock array is "WSO2" then message goes to the BE, else message dropped
 > _Request_ - http://localhost:9090/jsonarrayfilter 
+
 > _Payload_ - 
 {
   "StockExchange": "NASDAQ",
