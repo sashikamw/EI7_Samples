@@ -62,6 +62,7 @@ _Payload_ - <getQuote><symbol>foo</symbol></getQuote>
 ##### **Service 04** - XPathNameSpaceFilter.bal
 If symbol is "IBM" then message goes to the BE, else message dropped
 > _Request_ - http://localhost:9090/xpathNameSpacefilter 
+
 _Header_ - SOAPAction:urn:getQuote , Content-Type:text/xml;charset=UTF-8
 _Payload_ - 
 
