@@ -35,7 +35,8 @@ If symbol of the second element in stock array is "WSO2" then message goes to th
 > _Request_ - http://localhost:9090/jsonarrayfilter 
 
 > _Payload_ - 
-```{
+```
+{
   "StockExchange": "NASDAQ",
   "Country" : "London",
   "address"  : {
@@ -53,7 +54,8 @@ If symbol of the second element in stock array is "WSO2" then message goes to th
       "price": "230.18"
     }
   ]
-}```
+}
+```
 
 ##### **Service 03** - XPathwithoutNameSpace.bal
 If symbol is "foo" then message goes to the BE, else message dropped
@@ -69,7 +71,8 @@ If symbol is "IBM" then message goes to the BE, else message dropped
 > _Header_ - SOAPAction:urn:getQuote , Content-Type:text/xml;charset=UTF-8
 > _Payload_ - 
 
-> ```<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.samples" xmlns:xsd="http://services.samples/xsd">
+> ```
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.samples" xmlns:xsd="http://services.samples/xsd">
    <soapenv:Header/>
    <soapenv:Body>
       <ser:getQuote>
@@ -80,7 +83,8 @@ If symbol is "IBM" then message goes to the BE, else message dropped
          </ser:request>
       </ser:getQuote>
    </soapenv:Body>
-</soapenv:Envelope>```
+</soapenv:Envelope>
+```
 
 ##### **Service 05** - XPathwithAttributes.bal
 If stock name of the id '3' is "WSO2" then message goes to the BE, else message dropped
@@ -172,7 +176,8 @@ If stock url contains "routeusingandor" AND stockvalue = "IBM"  Then verify whet
 > _Header_ - exchange : nasdaq
 
 > _Payload_ - 
-```{   "StockExchange": "NASDAQ",
+```
+{   "StockExchange": "NASDAQ",
   "Country" : "London",
   "address"  : {
     "streetAddress": "naist street",
@@ -187,7 +192,8 @@ If stock url contains "routeusingandor" AND stockvalue = "IBM"  Then verify whet
       "symbol"  : "WSO2",
       "price": "230.18"
     }   ]
-}```
+}
+```
 
 ##### **Service 13** - RouteUsingAndOrNot.bal
 If the 'requestor' is not "Peter" then verify If stock url contains "routeusingandor" AND stockvalue = "IBM", Then verify whether price >= 180 OR exchange = "nasdaq". if criteria met message processed, else message dropped
@@ -196,7 +202,8 @@ If the 'requestor' is not "Peter" then verify If stock url contains "routeusinga
 > _Header_ - exchange : nasdaq , requestor : EITeam
 
 > _Payload_ - 
-```{
+```
+{
   "StockExchange": "NASDAQ",
   "Country" : "London",
   "address"  : {
@@ -214,7 +221,8 @@ If the 'requestor' is not "Peter" then verify If stock url contains "routeusinga
       "price": "230.18"
     }
   ]
-}```
+}
+```
 
 ##### **Service 14** - XPathMultipleCaseWithDefaultCase.bal
 If multiple cases exists for a given xpath, direct to the correct case based on the value and process the message, else send the message to the default case.
