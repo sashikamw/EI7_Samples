@@ -71,8 +71,7 @@ If symbol is "IBM" then message goes to the BE, else message dropped
 > _Header_ - SOAPAction:urn:getQuote , Content-Type:text/xml;charset=UTF-8
 > _Payload_ - 
 
-> ```
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.samples" xmlns:xsd="http://services.samples/xsd">
+> ``` <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.samples" xmlns:xsd="http://services.samples/xsd">
    <soapenv:Header/>
    <soapenv:Body>
       <ser:getQuote>
@@ -83,8 +82,7 @@ If symbol is "IBM" then message goes to the BE, else message dropped
          </ser:request>
       </ser:getQuote>
    </soapenv:Body>
-</soapenv:Envelope>
-```
+</soapenv:Envelope> ```
 
 ##### **Service 05** - XPathwithAttributes.bal
 If stock name of the id '3' is "WSO2" then message goes to the BE, else message dropped
